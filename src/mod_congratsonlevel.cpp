@@ -292,7 +292,7 @@ public:
                 // Issue a raid warning to the player
                 std::ostringstream ss2;
                 ss2 << "Congrats on Level " << level << " " << player->GetName() << "! You've been awarded " << money << " gold and a few treasures!";
-                player->GetSession()->SendNotification(ss2.str().c_str());
+                player->GetSession()->SendNotification(SERVER_MSG_STRING, ss2.str().c_str());
 
                 return;
             }
