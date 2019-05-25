@@ -63,6 +63,7 @@ config file for quick modifications.
 #include "Configuration/Config.h"
 #include "ScriptMgr.h"
 #include "Player.h"
+#include "Chat.h"
 
 bool CongratsEnable = true;
 bool CongratsAnnounceModule = true;
