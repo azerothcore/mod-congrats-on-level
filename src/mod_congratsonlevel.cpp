@@ -60,26 +60,64 @@ config file for quick modifications.
 
 */
 
-#include "Config.h"
+#include "Configuration/Config.h"
+#include "ScriptMgr.h"
 #include "Player.h"
+#include "Chat.h"
+
+bool CongratsEnable = true;
+bool CongratsAnnounceModule = true;
+
+class CongratsConfig : public WorldScript
+{
+public:
+    CongratsConfig() : WorldScript("CongratsConfig") { }
+
+    void OnBeforeConfigLoad(bool reload) override
+    {
+        if (!reload) {
+            std::string conf_path = _CONF_DIR;
+            std::string cfg_file = conf_path + "/mod_congratsonlevel.conf";
+
+            std::string cfg_def_file = cfg_file + ".dist";
+            sConfigMgr->LoadMore(cfg_def_file.c_str());
+            sConfigMgr->LoadMore(cfg_file.c_str());
+        }
+    }
+
+    // Load Configuration Settings
+    void SetInitialWorldSettings()
+    {
+        CongratsEnable = sConfigMgr->GetBoolDefault("Congrats.Enable", true);
+        CongratsAnnounceModule = sConfigMgr->GetBoolDefault("Congrats.Announce", true);
+    }
+};
+
+class CongratsAnnounce : public PlayerScript
+{
+
+public:
+
+    CongratsAnnounce() : PlayerScript("CongratsAnnounce") {}
+
+    void OnLogin(Player* player)
+    {
+        // Announce Module
+        if (CongratsEnable)
+        {
+            if (CongratsAnnounceModule)
+            {
+                ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00CongratsOnLevel |rmodule.");
+            }
+        }
+    }
+};
 
 class CongratsOnLevel : public PlayerScript
 {
 
 public:
     CongratsOnLevel() : PlayerScript("CongratsOnLevel") { }
-
-    // Announce Module
-    void OnLogin(Player *player)
-    {
-        if (sConfigMgr->GetBoolDefault("Congrats.Enable", true))
-        {
-            if (sConfigMgr->GetBoolDefault("Congrats.Announce", true))
-            {
-                ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00CongratsOnLevel |rmodule.");
-            }
-        }
-    }
 
     // Level Up Rewards
     void OnLevelChanged(Player* player, uint8 oldLevel)
@@ -254,7 +292,7 @@ public:
                 // Issue a raid warning to the player
                 std::ostringstream ss2;
                 ss2 << "Congrats on Level " << level << " " << player->GetName() << "! You've been awarded " << money << " gold and a few treasures!";
-                player->GetSession()->SendNotification(ss2.str().c_str());
+                player->GetSession()->SendNotification(SERVER_MSG_STRING, ss2.str().c_str());
 
                 return;
             }
@@ -262,29 +300,10 @@ public:
     }
 };
 
-class CongratsOnLevelWorld : public WorldScript
-{
-public:
-	CongratsOnLevelWorld() : WorldScript("CongratsOnLevelWorld") { }
-
-	void OnBeforeConfigLoad(bool reload) override
-	{
-		if (!reload) {
-			std::string conf_path = _CONF_DIR;
-			std::string cfg_file = conf_path + "/mod_congratsonlevel.conf";
-#ifdef WIN32
-			cfg_file = "mod_congratsonlevel.conf";
-#endif
-			std::string cfg_def_file = cfg_file + ".dist";
-			sConfigMgr->LoadMore(cfg_def_file.c_str());
-
-			sConfigMgr->LoadMore(cfg_file.c_str());
-		}
-	}
-};
 
 void AddCongratsOnLevelScripts()
 {
-	new CongratsOnLevelWorld();
+	new CongratsConfig();
+	new CongratsAnnounce();
     new CongratsOnLevel();
 }
