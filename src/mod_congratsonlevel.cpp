@@ -260,6 +260,8 @@ public:
             }
 
             default:
+            // If enabled...
+            if (sConfigMgr->GetBoolDefault("CongratsPerLevel.Enable", true))
             {
                 // Issue a server notification for the player on level up.
                 std::ostringstream ss;
