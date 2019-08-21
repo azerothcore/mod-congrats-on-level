@@ -65,8 +65,6 @@ config file for quick modifications.
 #include "Player.h"
 #include "Chat.h"
 
-bool CongratsEnable = true;
-bool CongratsAnnounceModule = true;
 
 class CongratsConfig : public WorldScript
 {
@@ -84,13 +82,6 @@ public:
             sConfigMgr->LoadMore(cfg_file.c_str());
         }
     }
-
-    // Load Configuration Settings
-    void SetInitialWorldSettings()
-    {
-        CongratsEnable = sConfigMgr->GetBoolDefault("Congrats.Enable", true);
-        CongratsAnnounceModule = sConfigMgr->GetBoolDefault("Congrats.Announce", true);
-    }
 };
 
 class CongratsAnnounce : public PlayerScript
@@ -103,13 +94,10 @@ public:
     void OnLogin(Player* player)
     {
         // Announce Module
-        if (CongratsEnable)
+        if (sConfigMgr->GetBoolDefault("Congrats.Announce", true))
         {
-            if (CongratsAnnounceModule)
-            {
                 ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00CongratsOnLevel |rmodule.");
-            }
-        }
+         }
     }
 };
 
