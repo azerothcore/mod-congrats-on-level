@@ -1,7 +1,8 @@
 # ![logo](https://raw.githubusercontent.com/azerothcore/azerothcore.github.io/master/images/logo-github.png) AzerothCore
-# mod-congrats-on-level
+## mod-congrats-on-level
 ### This is a module for [AzerothCore](http://www.azerothcore.org)
-- Latest build status with azerothcore: [![Build Status](https://travis-ci.org/azerothcore/mod-congrats-on-level.svg?branch=master)](https://travis-ci.org/azerothcore/mod-congrats-on-level)
+- Latest build status with azerothcore: [![Build Status](https://github.com/azerothcore/mod-congrats-on-level/workflows/core-build/badge.svg?branch=master&event=push)](https://github.com/azerothcore/mod-congrats-on-level)
+
 #### Features:
 This module rewards players when they reach specific levels. It has the option to reward gold, two items, and a
 buff or any combination. It also announces to the world when a player levels up. All rewards can be set in the
