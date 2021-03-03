@@ -65,25 +65,6 @@ config file for quick modifications.
 #include "Player.h"
 #include "Chat.h"
 
-
-class CongratsConfig : public WorldScript
-{
-public:
-    CongratsConfig() : WorldScript("CongratsConfig") { }
-
-    void OnBeforeConfigLoad(bool reload) override
-    {
-        if (!reload) {
-            std::string conf_path = _CONF_DIR;
-            std::string cfg_file = conf_path + "/mod_congratsonlevel.conf";
-
-            std::string cfg_def_file = cfg_file + ".dist";
-            sConfigMgr->LoadMore(cfg_def_file.c_str());
-            sConfigMgr->LoadMore(cfg_file.c_str());
-        }
-    }
-};
-
 class CongratsAnnounce : public PlayerScript
 {
 
@@ -293,7 +274,6 @@ public:
 
 void AddCongratsOnLevelScripts()
 {
-	new CongratsConfig();
 	new CongratsAnnounce();
     new CongratsOnLevel();
 }
