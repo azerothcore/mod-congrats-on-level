@@ -217,7 +217,6 @@ public:
                 std::ostringstream ss;
                 ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << to_string(player->getLevel()) << "|cffFFFFFF!";
                 sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
-                break;
             }
 
             // If level is defined, they hit a reward level.
