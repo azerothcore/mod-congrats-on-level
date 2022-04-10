@@ -2,7 +2,8 @@
 
 # Congrats On Level #
 
-#### A module for AzerothCore by [StygianTheBest](https://github.com/StygianTheBest/AzerothCore-Content/tree/master/Modules)
+#### A module for AzerothCore (https://github.com/azerothcore/mod-congrats-on-level)
+#### Originally by [StygianTheBest](https://github.com/StygianTheBest/AzerothCore-Content/tree/master/Modules)
 ------------------------------------------------------------------------------------------------------------------
 
 
@@ -33,12 +34,14 @@ config file for quick modifications.
 
 ### Version ###
 ------------------------------------------------------------------------------------------------------------------
+- v2022.04.09 - Fixed deprecation warnings
 - v2017.08.06 - Release
 - v2017.09.30 - Fix Level Display Bug. Update Strings.
 
 
 ### Credits ###
 ------------------------------------------------------------------------------------------------------------------
+- [SoulSeekkor](https://github.com/SoulSeekkor)
 - [LordPsyan](https://bitbucket.org/lordpsyan/lordpsyan-patches)
 - [Blizzard Entertainment](http://blizzard.com)
 - [TrinityCore](https://github.com/TrinityCore/TrinityCore/blob/3.3.5/THANKS)
