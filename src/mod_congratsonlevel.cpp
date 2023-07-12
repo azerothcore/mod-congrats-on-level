@@ -293,14 +293,14 @@ public:
                 sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
 
                 // Give the items to the player
-                player->AddItem(item1, 1);				// Defined Item 1
-                player->AddItem(item2, 1);				// Defined Item 2
+                player->AddItem(item1, 1);  // Defined Item 1
+                player->AddItem(item2, 1);  // Defined Item 2
 
                 // Give gold to the player
-                player->ModifyMoney(money*GOLD);		// Defined Gold
+                player->ModifyMoney(money*GOLD);    // Defined Gold
 
                 // Buff the player
-                player->CastSpell(player, spell);		// Defined Spell
+                player->CastSpell(player, spell);   // Defined Spell
 
                 // Issue a raid warning to the player
                 std::ostringstream ss2;
