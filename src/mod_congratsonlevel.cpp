@@ -88,13 +88,20 @@ uint32 giveAward(Player* player)
         do
         {
             Field* fields = result->Fetch();
-            player->ModifyMoney(fields[1].Get<uint32>() * GOLD);
-            player->CastSpell(player, fields[2].Get<uint32>());
-            player->AddItem(fields[3].Get<uint32>(), 1);
-            player->AddItem(fields[4].Get<uint32>(), 1);
-            money += fields[1].Get<uint32>() * GOLD;
+            if (fields[1].Get<uint32>() > 0)
+            {
+                player->ModifyMoney(fields[1].Get<uint32>() * GOLD);
+                money += fields[1].Get<uint32>() * GOLD;
+            }
+            if (fields[2].Get<uint32>() > 0)
+                player->CastSpell(player, fields[2].Get<uint32>());
+            if (fields[3].Get<uint32>() > 0)
+                player->AddItem(fields[3].Get<uint32>(), 1);
+            if (fields[4].Get<uint32>())
+                player->AddItem(fields[4].Get<uint32>(), 1);
         }
         while (result->NextRow());
+
         return money;
     }
     return money;
