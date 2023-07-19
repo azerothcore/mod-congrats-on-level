@@ -5,8 +5,7 @@ CREATE TABLE IF NOT EXISTS `mod_congrats_on_level_items` (
     `itemId1` int unsigned NOT NULL DEFAULT '0',
     `itemId2` int unsigned NOT NULL DEFAULT '0',
     `race` tinyint unsigned NOT NULL DEFAULT '0',
-    `class` tinyint unsigned NOT NULL DEFAULT '0',
-    PRIMARY KEY (`level`, `race`, `class`)
+    `class` tinyint unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DELETE FROM `mod_congrats_on_level_items`;
