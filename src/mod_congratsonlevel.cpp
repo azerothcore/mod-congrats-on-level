@@ -68,6 +68,38 @@ config file for quick modifications.
 #include "Player.h"
 #include "Chat.h"
 
+struct COL
+{
+    uint32 acoreMessageId;
+    bool congratsAnnounce, congratsEnable;
+    bool CongratsPerLevelEnable;
+};
+
+COL col;
+
+uint32 giveAward(Player* player)
+{
+    QueryResult result = WorldDatabase.Query("SELECT * FROM `mod_congrats_on_level_items` WHERE `level`={} AND (`race`={} OR `race`=0) AND (`class`={} OR `class`=0)", player->getLevel(), player->getRace(), player->getClass());
+
+    uint32 money = 0;
+
+    if (result)
+    {
+        do
+        {
+            Field* fields = result->Fetch();
+            player->ModifyMoney(fields[1].Get<uint32>() * GOLD);
+            player->CastSpell(player, fields[2].Get<uint32>());
+            player->AddItem(fields[3].Get<uint32>(), 1);
+            player->AddItem(fields[4].Get<uint32>(), 1);
+            money += fields[1].Get<uint32>() * GOLD;
+        }
+        while (result->NextRow());
+        return money;
+    }
+    return money;
+}
+
 class CongratsAnnounce : public PlayerScript
 {
 
@@ -78,38 +110,15 @@ public:
     void OnLogin(Player* player)
     {
         // Announce Module
-        if (sConfigMgr->GetOption<bool>("Congrats.Announce", true))
+        if (col.congratsAnnounce)
         {
-            std::string messageModule = "";
-            switch (player->GetSession()->GetSessionDbLocaleIndex())
-            {
-                case LOCALE_enUS:
-                case LOCALE_koKR:
-                case LOCALE_frFR:
-                case LOCALE_deDE:
-                case LOCALE_zhCN:
-                case LOCALE_zhTW:
-                case LOCALE_ruRU:
-                {
-                    messageModule = "This server is running the |cff4CFF00CongratsOnLevel |rmodule.";
-                    break;
-                }
-                case LOCALE_esES:
-                case LOCALE_esMX:
-                {
-                    messageModule = "Este servidor está ejecutando el módulo |cff4CFF00CongratsOnLevel|r";
-                }
-                default:
-                    break;
-            }
-            ChatHandler(player->GetSession()).SendSysMessage(messageModule);
+            ChatHandler(player->GetSession()).SendSysMessage(col.acoreMessageId);
         }
     }
 };
 
 class CongratsOnLevel : public PlayerScript
 {
-
 public:
     CongratsOnLevel() : PlayerScript("CongratsOnLevel") { }
 
@@ -117,126 +126,91 @@ public:
     void OnLevelChanged(Player* player, uint8 oldLevel) override
     {
         // If enabled...
-        if (sConfigMgr->GetOption<bool>("Congrats.Enable", true)) {
+        if (col.congratsEnable)
+        {
+            uint8 level = player->getLevel();
+            uint32 money = 0;
 
-            std::string level;
-            uint32 money, item1, item2, spell;
-
-            if (oldLevel < 10 && player->getLevel() == 10)
+            switch (level)
             {
-                // Level 10
-                const uint32 L101 = sConfigMgr->GetOption<uint32>("Congrats.L101", 0);
-                const uint32 L102 = sConfigMgr->GetOption<uint32>("Congrats.L102", 0);
-                const uint32 L10M = sConfigMgr->GetOption<uint32>("Congrats.L10M", 0);
-                const uint32 L10S = sConfigMgr->GetOption<uint32>("Congrats.L10S", 0);
+                case 10:
+                {
+                    if (oldLevel < 10)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "10";
-                item1 = L101;
-                item2 = L102;
-                money = L10M;
-                spell = L10S;
-            }
-            else if (oldLevel < 20 && player->getLevel() == 20)
-            {
-                // Level 20
-                const uint32 L201 = sConfigMgr->GetOption<uint32>("Congrats.L201", 0);
-                const uint32 L202 = sConfigMgr->GetOption<uint32>("Congrats.L202", 0);
-                const uint32 L20M = sConfigMgr->GetOption<uint32>("Congrats.L20M", 0);
-                const uint32 L20S = sConfigMgr->GetOption<uint32>("Congrats.L20S", 0);
+                case 20:
+                {
+                    if (oldLevel < 20)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "20";
-                item1 = L201;
-                item2 = L202;
-                money = L20M;
-                spell = L20S;
-            }
-            else if (oldLevel < 30 && player->getLevel() == 30)
-            {
-                // Level 30
-                const uint32 L301 = sConfigMgr->GetOption<uint32>("Congrats.L301", 0);
-                const uint32 L302 = sConfigMgr->GetOption<uint32>("Congrats.L302", 0);
-                const uint32 L30M = sConfigMgr->GetOption<uint32>("Congrats.L30M", 0);
-                const uint32 L30S = sConfigMgr->GetOption<uint32>("Congrats.L30S", 0);
+                case 30:
+                {
+                    if (oldLevel < 30)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "30";
-                item1 = L301;
-                item2 = L302;
-                money = L30M;
-                spell = L30S;
-            }
-            else if (oldLevel < 40 && player->getLevel() == 40)
-            {
-                // Level 40
-                const uint32 L401 = sConfigMgr->GetOption<uint32>("Congrats.L401", 0);
-                const uint32 L402 = sConfigMgr->GetOption<uint32>("Congrats.L402", 0);
-                const uint32 L40M = sConfigMgr->GetOption<uint32>("Congrats.L40M", 0);
-                const uint32 L40S = sConfigMgr->GetOption<uint32>("Congrats.L40S", 0);
+                case 40:
+                {
+                    if (oldLevel < 40)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "40";
-                item1 = L401;
-                item2 = L402;
-                money = L40M;
-                spell = L40S;
-            }
-            else if (oldLevel < 50 && player->getLevel() == 50)
-            {
-                // Level 50
-                const uint32 L501 = sConfigMgr->GetOption<uint32>("Congrats.L501", 0);
-                const uint32 L502 = sConfigMgr->GetOption<uint32>("Congrats.L502", 0);
-                const uint32 L50M = sConfigMgr->GetOption<uint32>("Congrats.L50M", 0);
-                const uint32 L50S = sConfigMgr->GetOption<uint32>("Congrats.L50S", 0);
+                case 50:
+                {
+                    if (oldLevel < 50)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "50";
-                item1 = L501;
-                item2 = L502;
-                money = L50M;
-                spell = L50S;
-            }
-            else if (oldLevel < 60 && player->getLevel() == 60)
-            {
-                // Level 60
-                const uint32 L601 = sConfigMgr->GetOption<uint32>("Congrats.L601", 0);
-                const uint32 L602 = sConfigMgr->GetOption<uint32>("Congrats.L602", 0);
-                const uint32 L60M = sConfigMgr->GetOption<uint32>("Congrats.L60M", 0);
-                const uint32 L60S = sConfigMgr->GetOption<uint32>("Congrats.L60S", 0);
+                case 60:
+                {
+                    if (oldLevel < 60)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "60";
-                item1 = L601;
-                item2 = L602;
-                money = L60M;
-                spell = L60S;
-            }
-            else if (oldLevel < 70 && player->getLevel() == 70)
-            {
-                // Level 70
-                const uint32 L701 = sConfigMgr->GetOption<uint32>("Congrats.L701", 0);
-                const uint32 L702 = sConfigMgr->GetOption<uint32>("Congrats.L702", 0);
-                const uint32 L70M = sConfigMgr->GetOption<uint32>("Congrats.L70M", 0);
-                const uint32 L70S = sConfigMgr->GetOption<uint32>("Congrats.L70S", 0);
+                case 70:
+                {
+                    if (oldLevel < 70)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "70";
-                item1 = L701;
-                item2 = L702;
-                money = L70M;
-                spell = L70S;
-            }
-            else if (oldLevel < 80 && player->getLevel() == 80)
-            {
-                // Level 80
-                const uint32 L801 = sConfigMgr->GetOption<uint32>("Congrats.L801", 0);
-                const uint32 L802 = sConfigMgr->GetOption<uint32>("Congrats.L802", 0);
-                const uint32 L80M = sConfigMgr->GetOption<uint32>("Congrats.L80M", 0);
-                const uint32 L80S = sConfigMgr->GetOption<uint32>("Congrats.L80S", 0);
+                case 80:
+                {
+                    if (oldLevel < 80)
+                    {
+                        money = giveAward(player);
+                    }
+                }
+                break;
 
-                level = "80";
-                item1 = L801;
-                item2 = L802;
-                money = L80M;
-                spell = L80S;
+                default:
+                    break;
             }
 
             // If enabled...
-            if (sConfigMgr->GetOption<bool>("CongratsPerLevel.Enable", true))
+            if (col.CongratsPerLevelEnable)
             {
                 // Issue a server notification for the player on level up.
                 std::ostringstream ss;
@@ -265,7 +239,7 @@ public:
             }
 
             // If level is defined, they hit a reward level.
-            if (!level.empty())
+            if (!level && col.CongratsPerLevelEnable)
             {
                 // Issue a server notification for the player on level up.
                 std::ostringstream ss;
@@ -291,16 +265,6 @@ public:
                         break;
                 }
                 sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
-
-                // Give the items to the player
-                player->AddItem(item1, 1);  // Defined Item 1
-                player->AddItem(item2, 1);  // Defined Item 2
-
-                // Give gold to the player
-                player->ModifyMoney(money*GOLD);    // Defined Gold
-
-                // Buff the player
-                player->CastSpell(player, spell);   // Defined Spell
 
                 // Issue a raid warning to the player
                 std::ostringstream ss2;
@@ -332,8 +296,27 @@ public:
     }
 };
 
+class ModCongratsLevelWorldScript : public WorldScript
+{
+public:
+    ModCongratsLevelWorldScript() : WorldScript("ModCongratsLevelWorldScript") { }
+
+    void OnBeforeConfigLoad(bool reload) override
+    {
+        if (!reload)
+        {
+            sConfigMgr->LoadModulesConfigs();
+            col.acoreMessageId = sConfigMgr->GetOption<uint32>("Congrats.Acore.String.ID", 60000);
+            col.congratsAnnounce = sConfigMgr->GetOption<uint32>("Congrats.Announce", 1);
+            col.congratsEnable = sConfigMgr->GetOption<uint32>("Congrats.Enable", 1);
+            col.CongratsPerLevelEnable = sConfigMgr->GetOption<uint32>("CongratsPerLevel.Enable", 1);
+        }
+    }
+};
+
 void AddCongratsOnLevelScripts()
 {
-	new CongratsAnnounce();
+    new CongratsAnnounce();
     new CongratsOnLevel();
+    new ModCongratsLevelWorldScript();
 }
