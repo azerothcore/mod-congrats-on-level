@@ -94,7 +94,7 @@ uint32 giveAward(Player* player)
                 money += fields[1].Get<uint32>() * GOLD;
             }
             if (fields[2].Get<uint32>() > 0)
-                player->CastSpell(player, fields[2].Get<uint32>());
+                player->learnSpell(fields[2].Get<uint32>());
             if (fields[3].Get<uint32>() > 0)
                 player->AddItem(fields[3].Get<uint32>(), 1);
             if (fields[4].Get<uint32>())
