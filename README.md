@@ -17,7 +17,7 @@ This module allows you to configure a series of prizes, by class, race and level
 1. `level`: Level that the player must have to get the reward.
 2. `money`: Amount of money to deliver, it can be 0.
 3. `spell`: Id of the spell that you want to teach or cast, it can be 0.
-4. `learn`: If it is at 0, the spell is cast, if not, it is learned.
+4. `learn`: If it's 0, the spell is cast. If it is 1, it is learned.
 5. `itemId1`: Id of the item that you want to deliver, it can be 0.
 6. `itemId2`: Id of the item that you want to deliver, it can be 0.
 7. `race`: 0 for all or specify race id.
