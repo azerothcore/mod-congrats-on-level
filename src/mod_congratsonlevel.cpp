@@ -301,7 +301,7 @@ public:
                     default:
                         break;
                 }
-                player->GetSession()->SendNotification(SERVER_MSG_STRING, ss2.str().c_str());
+                ChatHandler(player->GetSession()).SendNotification(SERVER_MSG_STRING, ss2.str().c_str());
                 return;
             }
         }
