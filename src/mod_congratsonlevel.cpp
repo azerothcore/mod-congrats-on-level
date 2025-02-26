@@ -64,9 +64,10 @@ config file for quick modifications.
 */
 
 #include "Configuration/Config.h"
-#include "ScriptMgr.h"
-#include "Player.h"
 #include "Chat.h"
+#include "Player.h"
+#include "ScriptMgr.h"
+#include "WorldSessionMgr.h"
 
 struct COL
 {
@@ -249,7 +250,7 @@ public:
                     default:
                         break;
                 }
-                sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
+                sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
             }
 
             // If level is defined, they hit a reward level.
@@ -278,7 +279,7 @@ public:
                     default:
                         break;
                 }
-                sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
+                sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
 
                 // Issue a raid warning to the player
                 std::ostringstream ss2;
