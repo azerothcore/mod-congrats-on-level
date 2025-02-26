@@ -117,25 +117,27 @@ class CongratsAnnounce : public PlayerScript
 
 public:
 
-    CongratsAnnounce() : PlayerScript("CongratsAnnounce") {}
+    CongratsAnnounce() : PlayerScript("CongratsAnnounce", {
+        PLAYERHOOK_ON_LOGIN
+    }) {}
 
-    void OnLogin(Player* player)
+    void OnPlayerLogin(Player* player)
     {
         // Announce Module
         if (col.congratsAnnounce)
-        {
             ChatHandler(player->GetSession()).SendSysMessage(col.acoreMessageId);
-        }
     }
 };
 
 class CongratsOnLevel : public PlayerScript
 {
 public:
-    CongratsOnLevel() : PlayerScript("CongratsOnLevel") { }
+    CongratsOnLevel() : PlayerScript("CongratsOnLevel", {
+        PLAYERHOOK_ON_LEVEL_CHANGED
+    }) { }
 
     // Level Up Rewards
-    void OnLevelChanged(Player* player, uint8 oldLevel) override
+    void OnPlayerLevelChanged(Player* player, uint8 oldLevel) override
     {
         // If enabled...
         if (col.congratsEnable)
@@ -148,72 +150,56 @@ public:
                 case 10:
                 {
                     if (oldLevel < 10)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
                 case 20:
                 {
                     if (oldLevel < 20)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
                 case 30:
                 {
                     if (oldLevel < 30)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
                 case 40:
                 {
                     if (oldLevel < 40)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
                 case 50:
                 {
                     if (oldLevel < 50)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
                 case 60:
                 {
                     if (oldLevel < 60)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
                 case 70:
                 {
                     if (oldLevel < 70)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
                 case 80:
                 {
                     if (oldLevel < 80)
-                    {
                         money = giveAward(player);
-                    }
                 }
                 break;
 
@@ -311,7 +297,9 @@ public:
 class ModCongratsLevelWorldScript : public WorldScript
 {
 public:
-    ModCongratsLevelWorldScript() : WorldScript("ModCongratsLevelWorldScript") { }
+    ModCongratsLevelWorldScript() : WorldScript("ModCongratsLevelWorldScript", {
+        WORLDHOOK_ON_BEFORE_CONFIG_LOAD
+    }) { }
 
     void OnBeforeConfigLoad(bool reload) override
     {
