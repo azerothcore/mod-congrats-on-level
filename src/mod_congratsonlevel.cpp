@@ -150,56 +150,72 @@ public:
                 case 10:
                 {
                     if (oldLevel < 10)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
                 case 20:
                 {
                     if (oldLevel < 20)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
                 case 30:
                 {
                     if (oldLevel < 30)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
                 case 40:
                 {
                     if (oldLevel < 40)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
                 case 50:
                 {
                     if (oldLevel < 50)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
                 case 60:
                 {
                     if (oldLevel < 60)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
                 case 70:
                 {
                     if (oldLevel < 70)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
                 case 80:
                 {
                     if (oldLevel < 80)
+                    {
                         money = giveAward(player);
+                    }
                 }
                 break;
 
@@ -237,7 +253,7 @@ public:
             }
 
             // If level is defined, they hit a reward level.
-            if (!level && col.CongratsPerLevelEnable)
+            if (!level)
             {
                 // Issue a server notification for the player on level up.
                 std::ostringstream ss;
