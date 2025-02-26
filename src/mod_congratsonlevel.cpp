@@ -253,7 +253,7 @@ public:
             }
 
             // If level is defined, they hit a reward level.
-            if (!level)
+            if (!level && col.CongratsPerLevelEnable)
             {
                 // Issue a server notification for the player on level up.
                 std::ostringstream ss;
