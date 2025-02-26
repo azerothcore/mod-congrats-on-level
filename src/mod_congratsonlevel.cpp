@@ -64,9 +64,10 @@ config file for quick modifications.
 */
 
 #include "Configuration/Config.h"
-#include "ScriptMgr.h"
-#include "Player.h"
 #include "Chat.h"
+#include "Player.h"
+#include "ScriptMgr.h"
+#include "WorldSessionMgr.h"
 
 struct COL
 {
@@ -117,25 +118,27 @@ class CongratsAnnounce : public PlayerScript
 
 public:
 
-    CongratsAnnounce() : PlayerScript("CongratsAnnounce") {}
+    CongratsAnnounce() : PlayerScript("CongratsAnnounce", {
+        PLAYERHOOK_ON_LOGIN
+    }) {}
 
-    void OnLogin(Player* player)
+    void OnPlayerLogin(Player* player)
     {
         // Announce Module
         if (col.congratsAnnounce)
-        {
             ChatHandler(player->GetSession()).SendSysMessage(col.acoreMessageId);
-        }
     }
 };
 
 class CongratsOnLevel : public PlayerScript
 {
 public:
-    CongratsOnLevel() : PlayerScript("CongratsOnLevel") { }
+    CongratsOnLevel() : PlayerScript("CongratsOnLevel", {
+        PLAYERHOOK_ON_LEVEL_CHANGED
+    }) { }
 
     // Level Up Rewards
-    void OnLevelChanged(Player* player, uint8 oldLevel) override
+    void OnPlayerLevelChanged(Player* player, uint8 oldLevel) override
     {
         // If enabled...
         if (col.congratsEnable)
@@ -193,7 +196,7 @@ public:
                     default:
                         break;
                 }
-                sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
+                sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
             }
 
             // Always send message on reward level up
@@ -222,7 +225,7 @@ public:
                     default:
                         break;
                 }
-                sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
+                sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
 
                 // Issue a raid warning to the player
                 std::ostringstream ss2;
@@ -257,7 +260,9 @@ public:
 class ModCongratsLevelWorldScript : public WorldScript
 {
 public:
-    ModCongratsLevelWorldScript() : WorldScript("ModCongratsLevelWorldScript") { }
+    ModCongratsLevelWorldScript() : WorldScript("ModCongratsLevelWorldScript", {
+        WORLDHOOK_ON_BEFORE_CONFIG_LOAD
+    }) { }
 
     void OnBeforeConfigLoad(bool reload) override
     {
