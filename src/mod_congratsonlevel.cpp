@@ -145,76 +145,22 @@ public:
         {
             uint8 level = player->GetLevel();
             uint32 money = 0;
+            bool isRewardLevel = false;
 
             switch (level)
             {
                 case 10:
-                {
-                    if (oldLevel < 10)
-                    {
-                        money = giveAward(player);
-                    }
-                }
-                break;
-
                 case 20:
-                {
-                    if (oldLevel < 20)
-                    {
-                        money = giveAward(player);
-                    }
-                }
-                break;
-
                 case 30:
-                {
-                    if (oldLevel < 30)
-                    {
-                        money = giveAward(player);
-                    }
-                }
-                break;
-
                 case 40:
-                {
-                    if (oldLevel < 40)
-                    {
-                        money = giveAward(player);
-                    }
-                }
-                break;
-
                 case 50:
-                {
-                    if (oldLevel < 50)
-                    {
-                        money = giveAward(player);
-                    }
-                }
-                break;
-
                 case 60:
-                {
-                    if (oldLevel < 60)
-                    {
-                        money = giveAward(player);
-                    }
-                }
-                break;
-
                 case 70:
-                {
-                    if (oldLevel < 70)
-                    {
-                        money = giveAward(player);
-                    }
-                }
-                break;
-
                 case 80:
                 {
-                    if (oldLevel < 80)
+                    if (oldLevel < level)
                     {
+                        isRewardLevel = true;
                         money = giveAward(player);
                     }
                 }
@@ -224,7 +170,7 @@ public:
                     break;
             }
 
-            // If enabled...
+            // Send message on every level up (if enabled)
             if (col.CongratsPerLevelEnable)
             {
                 // Issue a server notification for the player on level up.
@@ -253,8 +199,8 @@ public:
                 sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
             }
 
-            // If level is defined, they hit a reward level.
-            if (!level && col.CongratsPerLevelEnable)
+            // Always send message on reward level up
+            if (isRewardLevel)
             {
                 // Issue a server notification for the player on level up.
                 std::ostringstream ss;
