@@ -186,8 +186,7 @@ public:
     ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF级|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " 
        << player->GetName() 
        << " |cffFFFFFF已达到 |cff4CFF00" 
-       << std::to_string(player->GetLevel()) 
-       << " 级|cffFFFFFF!";
+       << static_cast<int>(player->GetLevel()) << " 级|cffFFFFFF!";
     break;
 }
                     case LOCALE_zhTW:
@@ -195,19 +194,18 @@ public:
     ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF級|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " 
        << player->GetName() 
        << " |cffFFFFFF已達到 |cff4CFF00" 
-       << std::to_string(player->GetLevel()) 
-       << " 級|cffFFFFFF!";
+       << static_cast<int>(player->GetLevel()) << " 級|cffFFFFFF!";
     break;
 }
                     case LOCALE_ruRU:
                     {
-                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << std::to_string(player->GetLevel()) << "|cffFFFFFF!";
+                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                         break;
                     }
                     case LOCALE_esES:
                     case LOCALE_esMX:
                     {
-                        ss << "|cffFFFFFF[ |cffFF0000F|cffFFA500E|cffFFFF00L|cff00FF00I|cff00FFFFC|cff6A5ACDI|cffFF00FFT|cff98FB98A|cff00FF00C|cff00FFFFI|cffFF0000O|cff00FF00N|cff00FFFFE|cffFF00FFS|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFha alcanzado |cff4CFF00el nivel " << std::to_string(player->GetLevel()) << "|cffFFFFFF!";
+                        ss << "|cffFFFFFF[ |cffFF0000F|cffFFA500E|cffFFFF00L|cff00FF00I|cff00FFFFC|cff6A5ACDI|cffFF00FFT|cff98FB98A|cff00FF00C|cff00FFFFI|cffFF0000O|cff00FF00N|cff00FFFFE|cffFF00FFS|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFha alcanzado |cff4CFF00el nivel " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                     }
                     default:
                         break;
