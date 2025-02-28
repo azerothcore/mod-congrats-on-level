@@ -182,16 +182,24 @@ public:
                     case LOCALE_frFR:
                     case LOCALE_deDE:
                     case LOCALE_zhCN:
+                    {
+                        ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF级|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已达到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 级|cffFFFFFF!";
+                        break;
+                    }
                     case LOCALE_zhTW:
+                    {
+                        ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF級|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已達到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 級|cffFFFFFF!";
+                        break;
+                    }
                     case LOCALE_ruRU:
                     {
-                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << std::to_string(player->GetLevel()) << "|cffFFFFFF!";
+                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                         break;
                     }
                     case LOCALE_esES:
                     case LOCALE_esMX:
                     {
-                        ss << "|cffFFFFFF[ |cffFF0000F|cffFFA500E|cffFFFF00L|cff00FF00I|cff00FFFFC|cff6A5ACDI|cffFF00FFT|cff98FB98A|cff00FF00C|cff00FFFFI|cffFF0000O|cff00FF00N|cff00FFFFE|cffFF00FFS|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFha alcanzado |cff4CFF00el nivel " << std::to_string(player->GetLevel()) << "|cffFFFFFF!";
+                        ss << "|cffFFFFFF[ |cffFF0000F|cffFFA500E|cffFFFF00L|cff00FF00I|cff00FFFFC|cff6A5ACDI|cffFF00FFT|cff98FB98A|cff00FF00C|cff00FFFFI|cffFF0000O|cff00FF00N|cff00FFFFE|cffFF00FFS|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFha alcanzado |cff4CFF00el nivel " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                     }
                     default:
                         break;
@@ -210,17 +218,25 @@ public:
                     case LOCALE_koKR:
                     case LOCALE_frFR:
                     case LOCALE_deDE:
-                    case LOCALE_zhCN:
-                    case LOCALE_zhTW:
+                    case LOCALE_zhCN: // 简体中文
+                   {
+                        ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF级|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已达到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 级|cffFFFFFF!";
+                        break;
+                    }
+                    case LOCALE_zhTW: // 繁体中文
+                    {
+                        ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF級|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已達到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 級|cffFFFFFF!";
+                        break;
+                    }
                     case LOCALE_ruRU:
                     {
-                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << std::to_string(player->GetLevel()) << "|cffFFFFFF!";
+                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                         break;
                     }
                     case LOCALE_esES:
                     case LOCALE_esMX:
                     {
-                        ss << "|cffFFFFFF[ |cffFF0000F|cffFFA500E|cffFFFF00L|cff00FF00I|cff00FFFFC|cff6A5ACDI|cffFF00FFT|cff98FB98A|cff00FF00C|cff00FFFFI|cffFF0000O|cff00FF00N|cff00FFFFE|cffFF00FFS|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFha alcanzado |cff4CFF00el nivel " << std::to_string(player->GetLevel()) << "|cffFFFFFF!";
+                        ss << "|cffFFFFFF[ |cffFF0000F|cffFFA500E|cffFFFF00L|cff00FF00I|cff00FFFFC|cff6A5ACDI|cffFF00FFT|cff98FB98A|cff00FF00C|cff00FFFFI|cffFF0000O|cff00FF00N|cff00FFFFE|cffFF00FFS|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFha alcanzado |cff4CFF00el nivel " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                     }
                     default:
                         break;
@@ -235,17 +251,25 @@ public:
                     case LOCALE_koKR:
                     case LOCALE_frFR:
                     case LOCALE_deDE:
-                    case LOCALE_zhCN:
-                    case LOCALE_zhTW:
+                    case LOCALE_zhCN: // 简体中文
+                    {
+                        ss2 << "恭喜达到等级 " << static_cast<int>(player->GetLevel()) << "，" << player->GetName() << "！您获得了 " << money << " 钱币和一些宝藏！";
+                        break;
+                    }
+                    case LOCALE_zhTW: // 繁体中文
+                    {
+                        ss2 << "恭喜達到等級 " << static_cast<int>(player->GetLevel()) << "，" << player->GetName() << "！您獲得了 " << money << " 錢幣和一些寶藏！";
+                        break;
+                    }
                     case LOCALE_ruRU:
                     {
-                        ss2 << "Congrats on Level " << std::to_string(player->GetLevel()) << " " << player->GetName() << "! You've been awarded " << money << " gold and a few treasures!";
+                        ss2 << "Congrats on Level " << static_cast<int>(player->GetLevel()) << " " << player->GetName() << "! You've been awarded " << money << " Copper and a few treasures!";
                         break;
                     }
                     case LOCALE_esES:
                     case LOCALE_esMX:
                     {
-                        ss2 << "¡Felicidades por el nivel " << std::to_string(player->GetLevel()) << " " << player->GetName() << " Se le ha concedido " << money << " oro y unos cuantos tesoros!";
+                        ss2 << "¡Felicidades por el nivel " << static_cast<int>(player->GetLevel()) << " " << player->GetName() << " Se le ha concedido " << money << " cobre y unos cuantos tesoros!";
                     }
                     default:
                         break;
