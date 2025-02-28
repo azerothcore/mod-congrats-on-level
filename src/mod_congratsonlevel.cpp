@@ -181,6 +181,11 @@ public:
                     case LOCALE_koKR:
                     case LOCALE_frFR:
                     case LOCALE_deDE:
+                    case LOCALE_ruRU:
+                    {
+                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
+                        break;
+                    }
                     case LOCALE_zhCN:
                     {
                         ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF级|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已达到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 级|cffFFFFFF!";
@@ -189,11 +194,6 @@ public:
                     case LOCALE_zhTW:
                     {
                         ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF級|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已達到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 級|cffFFFFFF!";
-                        break;
-                    }
-                    case LOCALE_ruRU:
-                    {
-                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                         break;
                     }
                     case LOCALE_esES:
@@ -218,19 +218,19 @@ public:
                     case LOCALE_koKR:
                     case LOCALE_frFR:
                     case LOCALE_deDE:
+                    case LOCALE_ruRU:
+                    {
+                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
+                        break;
+                    }
                     case LOCALE_zhCN: // 简体中文
-                   {
+                    {
                         ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF级|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已达到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 级|cffFFFFFF!";
                         break;
                     }
                     case LOCALE_zhTW: // 繁体中文
                     {
                         ss << "|cffFFFFFF[ |cffFF0000恭|cffFFA500喜|cffFFFF00你|cff00FF00升|cff00FFFF級|cff6A5ACD啦|cffFF00FF! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFF已達到 |cff4CFF00" << static_cast<int>(player->GetLevel()) << " 級|cffFFFFFF!";
-                        break;
-                    }
-                    case LOCALE_ruRU:
-                    {
-                        ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << static_cast<int>(player->GetLevel()) << "|cffFFFFFF!";
                         break;
                     }
                     case LOCALE_esES:
@@ -251,6 +251,11 @@ public:
                     case LOCALE_koKR:
                     case LOCALE_frFR:
                     case LOCALE_deDE:
+                    case LOCALE_ruRU:
+                    {
+                        ss2 << "Congrats on Level " << static_cast<int>(player->GetLevel()) << " " << player->GetName() << "! You've been awarded " << money << " Copper and a few treasures!";
+                        break;
+                    }
                     case LOCALE_zhCN: // 简体中文
                     {
                         ss2 << "恭喜达到等级 " << static_cast<int>(player->GetLevel()) << "，" << player->GetName() << "！您获得了 " << money << " 钱币和一些宝藏！";
@@ -259,11 +264,6 @@ public:
                     case LOCALE_zhTW: // 繁体中文
                     {
                         ss2 << "恭喜達到等級 " << static_cast<int>(player->GetLevel()) << "，" << player->GetName() << "！您獲得了 " << money << " 錢幣和一些寶藏！";
-                        break;
-                    }
-                    case LOCALE_ruRU:
-                    {
-                        ss2 << "Congrats on Level " << static_cast<int>(player->GetLevel()) << " " << player->GetName() << "! You've been awarded " << money << " Copper and a few treasures!";
                         break;
                     }
                     case LOCALE_esES:
